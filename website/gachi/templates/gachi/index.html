@@ -1,11 +1,43 @@
 <html>
-    <head>
-        <title>Hello</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-        <h1>Sample Template</h1>
-        <p>Hello, world!</p>
-    </body>
+
+<head>
+    <title>Hello</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'gachi/main.css' %}">
+</head>
+
+<body>
+<h1>Sample Template</h1>
+<div id="paragraph" class="fa-paragraph">
+    {% if description %}
+        <p>
+            {% for desc in description %}
+                {{ desc }}<br/>
+            {% endfor %}
+        </p>
+    {% else %}
+        <p>No description has been sent into context.</p>
+    {% endif %}
+</div>
+<div id="form-submit-proverb" class="form-submit">
+    {% if proverbs %}
+        <form class="container" method="post" name="proverb-selector">
+            {% for proverb in proverbs %}
+                <p>
+                    <input type="radio" name="proverb" id="proverb{{ forloop.counter }}" value="proverb">
+                    <label for="proverb{{ forloop.counter }}">{{ proverb }}</label>
+                </p>
+            {% endfor %}
+        </form>
+    {% else %}
+        <p>명언이 아직 없군요! 이거 어떻게 된 일이에요?</p>
+    {% endif %}
+</div>
+<div id="submit" class="wrapper style1 first">
+    <input type="submit" id="favorite-submit" value="다음 질문">
+</div>
+</body>
+
 </html>
