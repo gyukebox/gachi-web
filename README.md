@@ -22,7 +22,7 @@ $ pip install -r requirements.txt
 
 ## 현재 웹사이트가 어떤 식으로 작동하는지 보시고 싶으시다면
 ```
-cd website
+$ cd website
 ```
 명령어로 `website` 디렉토리에 접근해 주시면 `manage.py` 파일이 있을 거에요.  
 `manage.py` 파일이 있음을 확인하시면,
