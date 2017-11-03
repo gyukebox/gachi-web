@@ -4,92 +4,73 @@
 
 <head>
     <title>Hello</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="{% static 'gachi/styles/main.css' %}">
 </head>
 
 <body>
-    <div id="wrapper">
-        <div id="main">
-            <div class="inner">
-                <h1>Sample Template / 샘플 스타일</h1>
-                <!-- Section 별로 주제(?) 비슷한 게 달라집니다 -->
-                <!-- 요건 그냥 글 -->
-                <section>
-                    <h2>같이 찾는 우리의 가치 - 여러분들 삶에서 가장 중요한 것은 무엇입니까?</h2>
-                    {% if description %} 
-                        {% for desc in description %}
-                            <p>{{ desc }}</p>
-                        {% endfor %} 
-                    {% else %}
-                        <p>No description has been sent into context.</p>
-                    {% endif %}
-                </section>
-                <!-- 요건 설문조사 폼 -->
-                <section>
-                    <h3>다음 문구들 중 가장 자신에게 와 닿는 문구를 하나만 골라주세요</h3>
-                    {% if proverbs %}
-                    <form class="container" method="post" name="proverb-selector">
-                        {% for proverb in proverbs %}
-                        <p>
-                            <input type="radio" name="proverb" id="proverb{{ forloop.counter }}">
-                            <label for="proverb{{ forloop.counter }}">
-                                {{ proverb }}
-                            </label>
-                        </p>
-                        {% endfor %}
-                    </form>
-                    {% else %}
-                    <p>명언이 아직 없군요! 이거 어떻게 된 일이에요?</p>
-                    {% endif %}
-                </section>
-                <!-- Submit 버튼 -->
-                <section>
-                    <div id="submit" class="wrapper style1 first">
-                        <input type="submit" class="special" id="favorite-submit" value="다음 질문">
-                    </div>
-                </section>
-                <section>
-                    <h2>그 다음 질문</h2>
-                    <p>아래의 질문들은 당신의 개인적인 정보(연령대와 성별) 을 물어보는 질문입니다.</p>
-                    <h4>당신의 연령대를 골라주세요</h4>
-                    <div>
-                        <form method="post" name="age-selector">
-                            <input type="radio" name="age" id="20-22">
-                            <label for="20-22">20~22</label>
-                            <input type="radio" name="age" id="23-26">
-                            <label for="23-26">23~26</label>
-                            <input type="radio" name="age" id="27~29">
-                            <label for="27~29">27~29</label>
-                            <input type="radio" name="age" id="30-34">
-                            <label for="30-34">30~34</label>
-                            <input type="radio" name="age" id="35-39">
-                            <label for="35-39">35~39</label>
-                            <input type="radio" name="age" id="40-49">
-                            <label for="40-49">40~49</label>
-                            <input type="radio" name="age" id="50-">
-                            <label for="50-">50 이상</label>
-                        </form>
-                    </div>
-                    <h4>당신의 성별을 골라주세요</h4>
-                    <div>
-                        <form method="post" name="gender-selector">
-                            <input type="radio" name="gender" id="male">
+<div id="wrapper">
+    <div id="main">
+        <div class="inner">
+            <h1>Sample Template / 샘플 스타일</h1>
+            <!-- Section 별로 주제(?) 비슷한 게 달라집니다 -->
+            <!-- 요건 그냥 글 -->
+            <section>
+                <h2>같이 찾는 우리의 가치 - 여러분들 삶에서 가장 중요한 것은 무엇입니까?</h2>
+                {% if description %}
+                    {% for desc in description %}
+                        <p>{{ desc }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>No description has been sent into context.</p>
+                {% endif %}
+            </section>
+            <!-- 요건 설문조사 폼 -->
+            <div>
+                <form accept-charset="UTF-8" enctype="text/plain" action="/result" method="post" id="poll" name="poll">
+                    <section>
+                        <h3>다음 문구들 중 가장 자신에게 와 닿는 문구를 하나만 골라주세요</h3>
+                        {% if proverbs %}
+                            {% for proverb in proverbs %}
+                                <p>
+                                    <input type="radio" name="proverb" id="proverb{{ forloop.counter }}"
+                                           value="{{ proverb }}">
+                                    <label for="proverb{{ forloop.counter }}">
+                                        {{ proverb }}
+                                    </label>
+                                </p>
+                            {% endfor %}
+                        {% else %}
+                            <p>명언이 아직 없군요! 이거 어떻게 된 일이에요?</p>
+                        {% endif %}
+                    </section>
+                    <section>
+                        <h2>그 다음 질문</h2>
+                        <p>아래의 질문들은 당신의 개인적인 정보(연령대와 성별) 을 물어보는 질문입니다.</p>
+                        <h4>당신의 나이를 적어주세요</h4>
+                        <div>
+                            <label for="age">당신은 몇 살이십니까?</label>
+                            <input type="number" id="age" name="age">
+                        </div>
+                        <h4>당신의 성별을 골라주세요</h4>
+                        <div>
+                            <input type="radio" name="gender" id="male" value="M">
                             <label for="male">남성</label>
-                            <input type="radio" name="gender" id="female">
+                            <input type="radio" name="gender" id="female" value="F">
                             <label for="female">여성</label>
-                        </form>
-                    </div>
-                </section>
-                <section>
-                    <div id="submit" class="wrapper style1 first">
-                        <input type="submit" class="special" id="favorite-submit" value="응답 제출">
-                    </div>
-                </section>
+                            <section>
+                                <div id="submit" class="wrapper style1 first">
+                                    <input type="submit" class="special" id="favorite-submit" value="응답 제출">
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 
