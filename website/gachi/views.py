@@ -1,4 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+
+from .models import Person
 
 
 # Create your views here.
@@ -26,3 +31,25 @@ def index(request):
         ]
     }
     return render(request, template_name='gachi/index.html', context=sample_context)
+
+
+def get_person_answer(request):
+    if request.method == 'POST':
+        # parse form
+        query_string = request.body.decode('utf-8')
+        params = query_string.split('\r\n')
+        print(params)
+
+        # parse actual values
+        proverb = params[0][(params[0].index('=')) + 1:]
+        age = params[1][(params[1].index('=')) + 1:]
+        gender = params[2][(params[2].index('=')) + 1:]
+
+        # generate model and insert into DB
+        person = Person(selected_proverb=proverb, age=int(age), gender=gender)
+        person.save()
+
+        return HttpResponse(params)
+    else:
+        return HttpResponseRedirect('/')
+
