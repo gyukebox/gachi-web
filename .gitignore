@@ -55,6 +55,9 @@ coverage.xml
 local_settings.py
 migrations/
 
+# static fonts
+fonts/
+
 # Flask stuff:
 instance/
 .webassets-cache
@@ -87,7 +90,6 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
-webenv/
 
 # Spyder project settings
 .spyderproject
@@ -105,3 +107,4 @@ webenv/
 # IDE and Editor
 .idea/
 .vscode/
+website/gachi/static/gachi/images/
