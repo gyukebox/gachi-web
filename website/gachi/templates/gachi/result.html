@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>설문 결과</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'gachi/styles/main.css' %}">
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="main">
+        <div class="inner">
+            <h1>Gachi - 여러분들의 응답들</h1>
+
+            <img src="{% static 'gachi/images/wordcloud.png' %}">
+
+            {% if description %}
+                <section>
+                    {% for paragraph in description %}
+                        <p>{{ paragraph }}</p>
+                    {% endfor %}
+                </section>
+            {% endif %}
+
+            <h2>연령대 별 응답 결과</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>20대 초반</th>
+                    <th>20대 중반</th>
+                    <th>20대 후반</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>
+                        <table class="alt">
+                            <thead>
+                            <tr>
+                                <th>가치</th>
+                                <th>선택한 사람</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for data in age.pre %}
+                                <tr>
+                                    <td>{{ data.0 }}</td>
+                                    <td>{{ data.1 }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="alt">
+                            <thead>
+                            <tr>
+                                <th>가치</th>
+                                <th>선택한 사람</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for data in age.mid %}
+                                <tr>
+                                    <td>{{ data.0 }}</td>
+                                    <td>{{ data.1 }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="alt">
+                            <thead>
+                            <tr>
+                                <th>가치</th>
+                                <th>선택한 사람</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for data in age.post %}
+                                <tr>
+                                    <td>{{ data.0 }}</td>
+                                    <td>{{ data.1 }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </section>
+            <section>
+                <h2>성별 별 응답 결과</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>남성</th>
+                        <th>여성</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <table width="100" class="alt">
+                                <thead>
+                                <tr>
+                                    <th>가치</th>
+                                    <th>선택한 사람</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in gender.male %}
+                                    <tr>
+                                        <td>{{ data.0 }}</td>
+                                        <td>{{ data.1 }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="alt">
+                                <thead>
+                                <tr>
+                                    <th>가치</th>
+                                    <th>선택한 사람</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in gender.female %}
+                                    <tr>
+                                        <td>{{ data.0 }}</td>
+                                        <td>{{ data.1 }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <form action="/">
+                    <div id="submit" class="wrapper style1 first">
+                        <input type="submit" class="special" id="favorite-submit" value="돌아가기">
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
