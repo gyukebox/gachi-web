@@ -55,6 +55,9 @@ coverage.xml
 local_settings.py
 migrations/
 
+# static fonts
+fonts/
+
 # Flask stuff:
 instance/
 .webassets-cache
