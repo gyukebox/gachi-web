@@ -107,3 +107,4 @@ ENV/
 # IDE and Editor
 .idea/
 .vscode/
+website/gachi/static/gachi/images/
