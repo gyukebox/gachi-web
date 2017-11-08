@@ -64,7 +64,6 @@ def get_person_answer(request):
             # parse form
             query_string = request.body.decode('utf-8')
             params = query_string.split('\r\n')
-            print(params)
 
             # parse actual values
             proverb = params[0][(params[0].index('=')) + 1:]
@@ -169,7 +168,6 @@ def generate_worldloud(text):
     from wordcloud import WordCloud
     from konlpy.tag import Mecab
 
-    print(text)
     phrases = ''
     for phrase in text:
         phrases += phrase + ' '
