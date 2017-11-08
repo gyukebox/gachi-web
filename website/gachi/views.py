@@ -24,6 +24,7 @@ def index(request):
 
         ],
         'description': [
+            '사람들은 다 각자의 가치관이 있습니다. 저희는 여러분들이 생각하는 가치관들을 명언을 통해 분석하고, 연령별, 및 성별별로 결과를 분석해 보려고 합니다.',
             '여러분들께 몇 가지의 문구를 보여 드릴 겁니다. 보시고 가장 마음에 드시는 문구 하나만 골라 주세요!'
         ]
     }
@@ -125,16 +126,22 @@ def analyze_by_age(data):
     """
     pre = [datum['category'] for datum in data if datum['age'] < 23]
     mid = [datum['category'] for datum in data if 23 <= datum['age'] < 27]
-    post = [datum['category'] for datum in data if datum['age'] >= 27]
+    post = [datum['category'] for datum in data if 27 <= datum['age'] < 30]
+    thirties = [datum['category'] for datum in data if 30 <= datum['age'] < 40]
+    others = [datum['category'] for datum in data if datum['age'] >= 40]
 
     pre_counter = Counter(pre)
     mid_counter = Counter(mid)
     post_counter = Counter(post)
+    thirties_counter = Counter(thirties)
+    others_counter = Counter(others)
 
     final_data = {
         'pre': sorted(pre_counter.items(), key=lambda x: x[1], reverse=True),
         'mid': sorted(mid_counter.items(), key=lambda x: x[1], reverse=True),
         'post': sorted(post_counter.items(), key=lambda x: x[1], reverse=True),
+        'thirties': sorted(thirties_counter.items(), key=lambda x: x[1], reverse=True),
+        'others': sorted(others_counter.items(), key=lambda x: x[1], reverse=True)
     }
     return final_data
 
