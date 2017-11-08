@@ -167,15 +167,15 @@ def analyze_by_gender(data):
 
 def generate_worldloud(text):
     from wordcloud import WordCloud
-    from konlpy.tag import Twitter
+    from konlpy.tag import Mecab
 
     print(text)
     phrases = ''
     for phrase in text:
         phrases += phrase + ' '
 
-    twitter = Twitter()
-    nouns = twitter.nouns(phrases)
+    mecab = Mecab()
+    nouns = mecab.nouns(phrases)
     words = ''
     for word in nouns:
         words += word + ' '
